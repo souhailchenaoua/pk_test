@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "pktest-7db94"
+  },
+  "targets": {},
+  "etags": {
+    "pktest-7db94": {
+      "extensionInstances": {
+        "justpass-me": "382d5093cf6865527f4eaf66d871262f6f2494e19e6fe17e7d82af1848dc80af"
+      }
+    }
+  }
+}

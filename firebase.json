@@ -1,0 +1,8 @@
+{
+  "emulators": {
+    "singleProjectMode": true
+  },
+  "extensions": {
+    "justpass-me": "justpass-me/justpass-me@0.1.3"
+  }
+}
