@@ -39,6 +39,7 @@ dependencies:
   justpassme_flutter: ^0.0.1+1
   firebase_auth: ^4.6.3
   firebase_app_check: ^0.1.5
+  dio: ^5.2.1+1
 
 dev_dependencies:
   flutter_test:

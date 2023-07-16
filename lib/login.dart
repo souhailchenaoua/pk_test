@@ -3,6 +3,8 @@ import 'package:pk_test/usertype.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../config.dart';
 import 'package:justpassme_flutter/justpassme_flutter.dart';
+import 'package:dio/dio.dart';
+
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +18,7 @@ class _LoginState extends State<Login> {
   final user = FirebaseAuth.instance.currentUser;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+  final dio = Dio();
   
   @override
   Widget build(BuildContext context) {
@@ -98,6 +101,9 @@ class _LoginState extends State<Login> {
                           }
                         } catch (e) {
                           print('${e}');
+                          dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+                          final response = await dio.get('$baseUrl');
+                          print(response.data);
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -113,6 +119,7 @@ class _LoginState extends State<Login> {
                                   ),
                                 ],
                               );
+                              
                             },
                           );
                         }
