@@ -6,6 +6,7 @@ import 'package:justpassme_flutter/justpassme_flutter.dart';
 import 'package:dio/dio.dart';
 
 
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -94,7 +95,7 @@ class _LoginState extends State<Login> {
               child: ElevatedButton(
                  onPressed: () async {
                    try {
-                          final result = await justPassMeClient.login(loginUrl, {});
+                    final result = await justPassMeClient.login(loginUrl, {});
                           String? token = result['token'] as String?;
                           if (token != null) {
                             await FirebaseAuth.instance.signInWithCustomToken(token);

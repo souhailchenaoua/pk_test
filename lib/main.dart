@@ -4,7 +4,6 @@ import 'package:pk_test/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pk_test/usertype.dart';
 import 'firebase_options.dart';
-import 'config.dart';
 import 'package:justpassme_flutter/justpassme_flutter.dart';
 
 Future<void> main() async {
@@ -15,9 +14,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController passwordcontroller = TextEditingController();
   final justPassMeClient = JustPassMe();
   final user = FirebaseAuth.instance.currentUser;
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -94,30 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 110,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      try{
-                final userToken = await user?.getIdToken();
-                await justPassMeClient.register(registrationUrl,
-                  {"Authorization": "Bearer $userToken"});
-              } catch (e) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Error'),
-                      content: Text('${e}'),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text('Close'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
+                    onPressed: ()  {
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: emailcontroller.text,
@@ -126,7 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                  builder: (context) => const UserType()),),
+                                      builder: (context) => const UserType()),
+                                ),
                                 print("Account created")
                               })
                           .catchError((error) => {
