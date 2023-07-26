@@ -20,7 +20,7 @@ PODS:
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseAppCheckInterop (10.11.0)
+  - FirebaseAppCheckInterop (10.12.0)
   - FirebaseAuth (10.10.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -31,36 +31,37 @@ PODS:
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.11.0):
+  - FirebaseCoreInternal (10.12.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - Flutter (1.0.0)
-  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+  - GoogleUtilities/AppDelegateSwizzler (7.11.4):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.11.1):
+  - GoogleUtilities/Environment (7.11.4):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.1):
+  - GoogleUtilities/Logger (7.11.4):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (7.11.1):
+  - GoogleUtilities/Network (7.11.4):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.11.1)"
-  - GoogleUtilities/Reachability (7.11.1):
+  - "GoogleUtilities/NSData+zlib (7.11.4)"
+  - GoogleUtilities/Reachability (7.11.4):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (3.1.1)
   - justpass-me (0.1.4)
   - justpassme_flutter (0.0.1):
     - Flutter
     - justpass-me (>= 0.1.4)
-  - PromisesObjC (2.2.0)
+  - PromisesObjC (2.3.1)
 
 DEPENDENCIES:
   - firebase_app_check (from `.symlinks/plugins/firebase_app_check/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
+  - justpass-me
   - justpassme_flutter (from `.symlinks/plugins/justpassme_flutter/ios`)
 
 SPEC REPOS:
@@ -94,17 +95,17 @@ SPEC CHECKSUMS:
   firebase_auth: 9905bc3d82328b5050a8b7cb410a959f150b6549
   firebase_core: 85b6664038311940ad60584eaabc73103c61f5de
   FirebaseAppCheck: 2e00dc026f02fdba40c811e0d94fb19b6ddf5de5
-  FirebaseAppCheckInterop: 255b6c0292fe5da995c8b2df0c02f6a3ca7f61b4
+  FirebaseAppCheckInterop: f95a4feb9089867aff1a4bdc2ce309137e07736a
   FirebaseAuth: 5ddbe23ebc4e647469261f5c59cd12a04f37c8e6
   FirebaseCore: d027ff503d37edb78db98429b11f580a24a7df2a
-  FirebaseCoreInternal: 9e46c82a14a3b3a25be4e1e151ce6d21536b89c0
+  FirebaseCoreInternal: 950500ad8a08963657f6d8c67b579740c06d6aa1
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
+  GoogleUtilities: c63691989bf362ba0505507da00eeb326192e83e
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   justpass-me: a5bf9f4f82fba041da62d404ec0ac388ab4a7bc4
   justpassme_flutter: 93921bc4da378545727117774430e0a5851b0063
-  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
 
-PODFILE CHECKSUM: a2127fb6e8aed0c1ba15e04b0c40c689f24a58be
+PODFILE CHECKSUM: a9bd30b34bd2bedc2674a78f03a9741befecc188
 
 COCOAPODS: 1.12.1
