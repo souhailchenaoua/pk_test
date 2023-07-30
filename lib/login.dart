@@ -95,6 +95,12 @@ class _LoginState extends State<Login> {
                     String? token = result['token'] as String?;
                     if (token != null) {
                       await FirebaseAuth.instance.signInWithCustomToken(token);
+                      print('succesful login');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserType()),
+                      );
                     }
                   } catch (e) {
                     print('${e}');

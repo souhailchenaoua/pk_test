@@ -10,8 +10,8 @@ project 'Runner', {
   'Release' => :release,
 }
 
-use_frameworks!
-pod 'netfox', :configurations => ['Debug', 'Test']
+#use_frameworks!
+#pod 'netfox', :configurations => ['Debug', 'Test']
 
 def flutter_root
   generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)

@@ -3,6 +3,7 @@
     "singleProjectMode": true
   },
   "extensions": {
-    "justpass-me": "justpass-me/justpass-me@0.1.3"
+    "justpass-me": "justpass-me/justpass-me@0.1.3",
+    "pktest-1": "justpass-me/justpass-me@0.1.3"
   }
 }
