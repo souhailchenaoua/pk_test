@@ -51,10 +51,16 @@ android {
         applicationId "com.example.pk_test"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        resValue("string", "host", "https://pktest.accounts.justpass.me")
+        resValue("string", "asset_statements", """
+           [{
+             "include": "https://pktest.accounts.justpass.me/.well-known/assetlinks.json"
+           }]
+        """)
     }
 
     buildTypes {
@@ -72,4 +78,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation("tech.amwal.justpassme:justpassme:1.0.0-beta06")
+    //implementation("androidx.biometric:biometric:1.1.0")
 }
