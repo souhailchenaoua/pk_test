@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../config.dart';
 import 'package:justpassme_flutter/justpassme_flutter.dart';
 import 'package:dio/dio.dart';
+import 'package:g_recaptcha_v3/g_recaptcha_v3.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -105,7 +108,7 @@ class _LoginState extends State<Login> {
                   } catch (e) {
                     print('${e}');
                     dio.interceptors.add(
-                    LogInterceptor(requestBody: true, responseBody: true));
+                        LogInterceptor(requestBody: true, responseBody: true));
                     final response = await dio.get('$loginUrl');
                     print(response.data);
                     showDialog(
@@ -130,9 +133,58 @@ class _LoginState extends State<Login> {
                 child: const Text('Login with JustPassMe'),
               ),
             ),
+            Container(
+              margin: const EdgeInsets.all(10),
+              color: Colors.white,
+              width: 200,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () async {
+                  try {
+                    sendSignInLink();
+                  } catch (e) {}
+                },
+                child: const Text('Passwordless Login '),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void sendSignInLink() async {
+    String email = emailcontroller.text;
+
+    if (email.isNotEmpty) {
+      try {
+        ActionCodeSettings acs = ActionCodeSettings(
+          url: 'https://pktest01.page.link/y1E4',
+          handleCodeInApp: true,
+          iOSBundleId: 'com.example.pk_test',
+          androidPackageName: 'com.example.pk_test',
+          androidInstallApp: true,
+          androidMinimumVersion: '12',
+        );
+
+        await FirebaseAuth.instance.sendSignInLinkToEmail(
+          email: email,
+          actionCodeSettings: acs,
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Authentication link sent to $email')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to send authentication link')),
+        );
+        print('Error sending email verification: $e');
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter an email address')),
+      );
+    }
   }
 }
