@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pk_test/login.dart';
@@ -9,6 +10,11 @@ import 'package:justpassme_flutter/justpassme_flutter.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAppCheck.instance.activate(
+    webRecaptchaSiteKey: 'recaptcha-v3-site-key',
+    androidProvider: AndroidProvider.debug,
+    appleProvider: AppleProvider.debug,
+  );
   runApp(const MyApp());
 }
 
@@ -21,7 +27,21 @@ class MyApp extends StatelessWidget {
       title: 'Welcome to Toure',
       theme: ThemeData(
           primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.black12),
-      home: const MyHomePage(title: 'Welcome to Toure App'),
+      home: StreamBuilder(
+	        stream:FirebaseAuth.instance.authStateChanges(),
+	        builder: (BuildContext context,snapshot)
+	        {
+	          if(snapshot.connectionState==ConnectionState.waiting){
+	            return const CircularProgressIndicator();
+	          }
+	          else if(snapshot.hasData){
+	            return  const UserType();
+	          }
+	          else{
+	            return const MyHomePage(title: 'Welcome to Toure');
+	          }
+	        },
+	      ),
     );
   }
 }

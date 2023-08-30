@@ -3,7 +3,6 @@ import 'package:pk_test/usertype.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../config.dart';
 import 'package:justpassme_flutter/justpassme_flutter.dart';
-import 'package:dio/dio.dart';
 import 'package:g_recaptcha_v3/g_recaptcha_v3.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -20,7 +19,6 @@ class _LoginState extends State<Login> {
   final user = FirebaseAuth.instance.currentUser;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
-  final dio = Dio();
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +103,7 @@ class _LoginState extends State<Login> {
                             builder: (context) => const UserType()),
                       );
                     }
-                  } catch (e) {
-                    print('${e}');
-                    dio.interceptors.add(
-                        LogInterceptor(requestBody: true, responseBody: true));
-                    final response = await dio.get('$loginUrl');
-                    print(response.data);
+                  } catch (e) {                    
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -153,28 +146,34 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void sendSignInLink() async {
-    String email = emailcontroller.text;
+  Future sendSignInLink() async {
+
+    String email = emailcontroller.text; 
+    ActionCodeSettings acs = ActionCodeSettings(
+              url: 'https://pktest1.page.link/Zi7X',
+              dynamicLinkDomain: 'pktest1.page.link',
+              handleCodeInApp: true,
+              iOSBundleId: 'com.example.pk_test',
+              androidPackageName: 'com.example.pk_test',
+              androidInstallApp: true,
+              androidMinimumVersion: "1",
+    );
 
     if (email.isNotEmpty) {
       try {
-        ActionCodeSettings acs = ActionCodeSettings(
-          url: 'https://pktest01.page.link/y1E4',
-          handleCodeInApp: true,
-          iOSBundleId: 'com.example.pk_test',
-          androidPackageName: 'com.example.pk_test',
-          androidInstallApp: true,
-          androidMinimumVersion: '12',
-        );
+        var emailAuth = emailcontroller.text;
+        FirebaseAuth.instance
+            .sendSignInLinkToEmail(email: emailAuth, actionCodeSettings: acs)
+            .catchError(
+                (onError) => ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to send authentication link')))
+          )
+            .then((value) => ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Authentication link sent to $email')))
+          );
 
-        await FirebaseAuth.instance.sendSignInLinkToEmail(
-          email: email,
-          actionCodeSettings: acs,
-        );
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Authentication link sent to $email')),
-        );
+      
+          
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to send authentication link')),
@@ -187,4 +186,10 @@ class _LoginState extends State<Login> {
       );
     }
   }
+
+  @override
+	  void initState() {
+	    // TODO: implement initState
+	    super.initState();
+	  }
 }

@@ -5,6 +5,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>webcredentials:pktest.accounts.justpass.me</string>
+		<string>applinks:https://pktest1.page.link</string>
 	</array>
 </dict>
 </plist>
