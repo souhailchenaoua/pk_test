@@ -28,20 +28,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.black12),
       home: StreamBuilder(
-	        stream:FirebaseAuth.instance.authStateChanges(),
-	        builder: (BuildContext context,snapshot)
-	        {
-	          if(snapshot.connectionState==ConnectionState.waiting){
-	            return const CircularProgressIndicator();
-	          }
-	          else if(snapshot.hasData){
-	            return  const UserType();
-	          }
-	          else{
-	            return const MyHomePage(title: 'Welcome to Toure');
-	          }
-	        },
-	      ),
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasData) {
+            return const UserType();
+          } else {
+            return const MyHomePage(title: 'Welcome to Toure');
+          }
+        },
+      ),
     );
   }
 }
@@ -110,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 110,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: ()  {
+                    onPressed: () {
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: emailcontroller.text,
