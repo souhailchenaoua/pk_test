@@ -22,8 +22,12 @@ class _LoginState extends State<Login> with WidgetsBindingObserver {
   void initState() {
     // TODO: implement initState
     super.initState();
-    
     WidgetsBinding.instance.addObserver(this);
+  }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -186,34 +190,35 @@ class _LoginState extends State<Login> with WidgetsBindingObserver {
       );
     }
   }
-@override
-void didChangeAppLifecycleState(AppLifecycleState state) async {
-  try {
-    if (state == AppLifecycleState.resumed) {
-      FirebaseDynamicLinks.instance.onLink.listen(
-        (PendingDynamicLinkData? dynamicLink) async {
-          final Uri? deepLink = dynamicLink?.link;
-          if (deepLink != null) {
-            handleLink(deepLink, emailcontroller.text);
-          }
-        },
-        onError: (e) async {
-          print(e.message);
-        },
-      );
 
-      final PendingDynamicLinkData? data =
-          await FirebaseDynamicLinks.instance.getInitialLink();
-      final Uri? deepLink = data?.link;
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    try {
+      if (state == AppLifecycleState.resumed) {
+        FirebaseDynamicLinks.instance.onLink.listen(
+          (PendingDynamicLinkData? dynamicLink) async {
+            final Uri? deepLink = dynamicLink?.link;
+            if (deepLink != null) {
+              handleLink(deepLink, emailcontroller.text);
+            }
+          },
+          onError: (e) async {
+            print(e.message);
+          },
+        );
 
-      if (deepLink != null) {
-        print(deepLink.userInfo);
+        final PendingDynamicLinkData? data =
+            await FirebaseDynamicLinks.instance.getInitialLink();
+        final Uri? deepLink = data?.link;
+
+        if (deepLink != null) {
+          print("deep-link:  "+deepLink.userInfo);
+        }
       }
+    } catch (e) {
+      print(e);
     }
-  } catch (e) {
-    print(e);
   }
-}
 
   void handleLink(Uri link, userEmail) async {
     if (link != null) {

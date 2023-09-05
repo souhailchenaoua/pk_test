@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Welcome to Toure',
       theme: ThemeData(
           primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.black12),
-      home: StreamBuilder(
+        home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
