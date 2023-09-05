@@ -22,7 +22,8 @@ class _LoginState extends State<Login> with WidgetsBindingObserver {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -185,23 +186,21 @@ class _LoginState extends State<Login> with WidgetsBindingObserver {
       );
     }
   }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    try {
-      FirebaseDynamicLinks.instance.onLink(
-          onSuccess: (PendingDynamicLinkData? dynamicLink) async {
-        final Uri? deepLink = dynamicLink?.link;
-        if (deepLink != null) {
-          handleLink(deepLink, emailcontroller.text);
-          FirebaseDynamicLinks.instance.onLink(
-              onSuccess: (PendingDynamicLinkData? dynamicLink) async {
-            final Uri? deepLink = dynamicLink!.link;
-            handleLink(deepLink!, emailcontroller.text);
-          }, );
-          // Navigator.pushNamed(context, deepLink.path);
-        }
-      },);
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) async {
+  try {
+    if (state == AppLifecycleState.resumed) {
+      FirebaseDynamicLinks.instance.onLink.listen(
+        (PendingDynamicLinkData? dynamicLink) async {
+          final Uri? deepLink = dynamicLink?.link;
+          if (deepLink != null) {
+            handleLink(deepLink, emailcontroller.text);
+          }
+        },
+        onError: (e) async {
+          print(e.message);
+        },
+      );
 
       final PendingDynamicLinkData? data =
           await FirebaseDynamicLinks.instance.getInitialLink();
@@ -210,10 +209,11 @@ class _LoginState extends State<Login> with WidgetsBindingObserver {
       if (deepLink != null) {
         print(deepLink.userInfo);
       }
-    } catch (e) {
-      print(e);
     }
+  } catch (e) {
+    print(e);
   }
+}
 
   void handleLink(Uri link, userEmail) async {
     if (link != null) {
