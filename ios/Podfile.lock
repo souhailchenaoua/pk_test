@@ -12,14 +12,14 @@ PODS:
     - firebase_core
     - FirebaseAppCheck (~> 10.12.0-beta)
     - Flutter
-  - firebase_auth (4.6.3):
+  - firebase_auth (4.9.0):
     - Firebase/Auth (= 10.12.0)
     - firebase_core
     - Flutter
   - firebase_core (2.15.1):
     - Firebase/CoreOnly (= 10.12.0)
     - Flutter
-  - firebase_dynamic_links (5.3.4):
+  - firebase_dynamic_links (5.3.5):
     - Firebase/DynamicLinks (= 10.12.0)
     - firebase_core
     - Flutter
@@ -105,9 +105,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
   firebase_app_check: 054d90729814a3b9727abd6b290bea1fe0009267
-  firebase_auth: 887426c05a8a301e6432ad1e194f16cc55888a13
+  firebase_auth: 097a2440d40bed75f4dfe4cb91b4d98349509b47
   firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
-  firebase_dynamic_links: d85cf455646322fd101c8a5a5942c3d47132fe80
+  firebase_dynamic_links: cc3fd36190c7b58c27353915271d2c0d031ee11b
   FirebaseAppCheck: c5e49dadf9c9cbabf0066074af938e032a0cce48
   FirebaseAppCheckInterop: 5e12dc623d443dedffcde9c6f3ed41510125d8ef
   FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
